@@ -1,0 +1,14 @@
+services:
+  laya-mcp:
+    build: .
+    # or use the published image: ghcr.io/OWNER/laya-mcp:latest
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - laya-data:/data
+    restart: unless-stopped
+    mem_limit: 4g
+
+volumes:
+  laya-data:

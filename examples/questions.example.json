@@ -1,0 +1,27 @@
+{
+  "state": {
+    "subject": "Refund still missing",
+    "body": "I asked for a refund three weeks ago and nobody answered. If I don't hear back by Friday I'm cancelling my subscription."
+  },
+  "questions": {
+    "intent": {
+      "type": "choice",
+      "instructions": "What does the customer want?",
+      "criteria": {
+        "refund": "Wants money back",
+        "cancel": "Wants to cancel the service",
+        "info": "Asks for information",
+        "other": "Anything else"
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": ["low", "medium", "high", "critical"]
+    },
+    "churn_risk": {
+      "type": "noul",
+      "instructions": "The customer is threatening to leave."
+    }
+  }
+}

@@ -1,0 +1,5 @@
+laya
+fastmcp>=2.13,<3
+py-key-value-aio[disk]
+cryptography
+uvicorn
