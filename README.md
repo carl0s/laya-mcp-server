@@ -71,7 +71,7 @@ You need Docker and a machine with at least 4 GB of free RAM. No GPU is required
 git clone https://github.com/OWNER/laya-mcp.git
 cd laya-mcp
 cp .env.example .env
-# set API_TOKENS to the output of: openssl rand -hex 32
+# set API_TOKENS to the output of: openssl rand -hex 48
 docker compose up -d
 docker compose logs -f   # the first start downloads about 1.3 GB of weights
 ```
@@ -103,6 +103,11 @@ Pick one mode with `AUTH_MODE`.
 4. In claude.ai, add a custom connector with the URL `https://laya.example.com/mcp`.
 
 GitHub lets any account complete the login, so the allowlist is enforced on every tool call. OAuth client registrations and tokens are stored encrypted in `DATA_DIR` and survive restarts as long as the volume does. Do not change `APP_SECRET` after the first start, or every client will have to reconnect.
+
+Authentication modes are mutually exclusive. Switching an existing deployment from
+`github` to `bearer` makes token-authenticated scripts and cron jobs work immediately,
+but disables the GitHub OAuth flow used by claude.ai custom connectors until the server
+is switched back to `github`.
 
 In `github` mode the REST endpoint is disabled unless you also set `API_TOKENS`.
 

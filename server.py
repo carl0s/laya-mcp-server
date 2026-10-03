@@ -62,6 +62,8 @@ if AUTH_MODE not in {"none", "bearer", "github"}:
     raise SystemExit(f"AUTH_MODE must be none, bearer or github, got '{AUTH_MODE}'")
 if AUTH_MODE == "bearer" and not API_TOKENS:
     raise SystemExit("AUTH_MODE=bearer needs at least one token in API_TOKENS")
+if AUTH_MODE == "bearer" and any(os.getenv(name, "").strip() for name in ("GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET")):
+    log.warning("AUTH_MODE=bearer disables GitHub OAuth and claude.ai custom connectors")
 if AUTH_MODE == "none" and HOST not in {"127.0.0.1", "localhost"}:
     log.warning("AUTH_MODE=none while listening on %s: anyone who can reach this port can use the model", HOST)
 
